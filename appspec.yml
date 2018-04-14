@@ -1,3 +1,18 @@
 version: 0.0
-
 os: linux
+files:
+  - source: /
+    destination: /var/www/index.html
+hooks:
+  BeforeInstall:
+    - location: scripts/installapache.sh
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: scripts/permissions.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: scripts/startapache.sh
+      timeout: 300
+      runas: root
